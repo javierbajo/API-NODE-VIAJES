@@ -10,6 +10,10 @@ const userSchema = new Schema(
         password: {type: String, required: true},
         username: {type:String, required: true},
         role: {type:String, default: "user", enum: ['admin', 'user']},
+        telefono: {type:String, required: true},
+        nombre: {type:String, required: true},
+        apellidos: {type:String, required: true},
+        direccion: {type:String, required: true},
         reservas: [{type: Schema.Types.ObjectId, ref: 'reservas'}] 
          // la ref de reservas: es el nombre de la colección en la DB de donde toma los id
     },{
