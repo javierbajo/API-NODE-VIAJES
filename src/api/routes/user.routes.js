@@ -1,27 +1,48 @@
 const express = require('express');
 const {
+    loginUser,
+    registerUser,
+    checkSession,
+    adminRole,
+    //------------
     getAllUsers, 
-    getUsersId,
-    getUsersName,
+    getUserById,
+    getUserByName,
     // -------------
-    postUsers, 
-    putUsers, 
-    deleteUsers, 
+    updateUser, 
+    deleteUser, 
     // -------------
     getAddfruitToUser
     } = require('../controller/user.controller');
 
+//Para validar usuarios debo importar los ficheros del MIDDLEWARE
+
+const { isAuth, isAdmin } = require('../../middlewares/auth');
+
+
+
+
 const router = express.Router();
 
-router.get('/', getAllUsers);
-router.get('/id/:id', getUsersId);
-router.get('/email/:email', getUsersName);
+//RUTAS DE PRUEBA------------------
+router.get('/pruebaAll/', getAllUsers);
+router.get('/pruebaEmail/:email', getUserByName);
+router.put('/pruebaUpdate/:id', updateUser);
+router.delete('/pruebaDelete/:id', deleteUser);
+//------------------------------------
+router.post('/login', loginUser);
+router.post('/register', registerUser)
+router.post('/checkSession', [isAuth], checkSession);
+router.post('/admin', [isAdmin], adminRole);
+//------------------------------
+router.get('/', [isAdmin], getAllUsers);
+router.get('/id/:id', getUserById);
+router.get('/email/:email', [isAuth], getUserByName);
 // ----------------------------------------
-router.post('/', postUsers);
-router.put('/:id', putUsers);
-router.delete('/:id', deleteUsers);
+router.put('/update/:id', [isAuth], updateUser);
+router.delete('/delete/:id', [isAuth], deleteUser);
 // ----------------------------------------
-router.get('/addfruit', getAddfruitToUser);
+router.get('/addfruit', [isAuth], getAddfruitToUser);
 
 
 
