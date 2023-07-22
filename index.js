@@ -14,6 +14,8 @@ cloudinary.config({
 
 const routerUser = require('./src/api/routes/user.routes.js');
 const routerBooking = require('./src/api/routes/booking.routes.js');
+const routerActivity = require('./src/api/routes/activity.routes.js');
+const routerDestination = require('./src/api/routes/destination.routes.js');
 
 const app = express();
 const {connect} = require('./src/utils/db.js');
@@ -23,6 +25,8 @@ app.use(cors());
 app.use(express.json());
 app.use('/bookings', routerBooking);
 app.use('/users', routerUser);
+app.use('/activities', routerActivity);
+app.use('/destinations', routerDestination);
 
 
 
