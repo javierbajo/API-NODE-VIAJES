@@ -33,4 +33,14 @@ const usedUserName = async (username)=>{
     return users.length;
 }
 
-module.exports = { validatePassword, validateEmail, usedEmail, usedUserName }
+const getUserId = async (id) => {
+    
+        
+        const getUser = await User.findById(id)
+        
+        return getUser;
+    
+    
+}
+
+module.exports = { validatePassword, validateEmail, usedEmail, usedUserName, getUserId }

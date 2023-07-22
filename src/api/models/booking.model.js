@@ -12,7 +12,7 @@ const bookingSchema = new Schema(
          // la ref de reservas: es el nombre de la colección en la DB de donde toma los id
     },{
         timestamps: true,
-        collection: 'reservas'
+        collection: 'bookings'
     }
 )
 

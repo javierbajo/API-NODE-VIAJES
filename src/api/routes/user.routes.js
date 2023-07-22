@@ -12,7 +12,7 @@ const {
     updateUser, 
     deleteUser, 
     // -------------
-    getAddfruitToUser
+    getAddDestinationToUser
     } = require('../controller/user.controller');
 
 //Para validar usuarios debo importar los ficheros del MIDDLEWARE
@@ -42,7 +42,7 @@ router.get('/email/:email', [isAuth], getUserByName);
 router.put('/update/:id', [isAuth], updateUser);
 router.delete('/delete/:id', [isAuth], deleteUser);
 // ----------------------------------------
-router.get('/addfruit', [isAuth], getAddfruitToUser);
+router.get('/addDestination', [isAuth], getAddDestinationToUser);
 
 
 

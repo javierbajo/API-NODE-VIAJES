@@ -5,7 +5,7 @@ const Booking = require('../models/booking.model')
 const getAllBookings = async (req, res) => {
     try{
         const allBookings = await Booking.find().populate({
-            path: "reservas", select:"destination, user"
+            path: "bookings", select:"destination, user"
             });
         return res.status(200).json(allBookings);
     }catch(error){

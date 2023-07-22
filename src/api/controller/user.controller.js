@@ -7,6 +7,7 @@ const {
   validateEmail,
   usedEmail,
   usedUserName,
+  getUserId
 } = require("../../utils/validators");
 const { generateSign } = require("../../utils/jwt");
 
@@ -139,42 +140,45 @@ const updateUser = async (req, res) => {
         const putUser = new User(req.body);
         putUser._id = id;
 
-        console.log(email);
-        console.log(putUser.email)
-
+      
         if (!validatePassword(putUser.password)) {
           return res.status(400).json({ message: "Contraseña incorrecta" });
         }
         if (!validateEmail(putUser.email)) {
           return res.status(400).json({ message: "Formato email incorrecto" });
         }
-        // if(putUser.email !== email){
-        //     if ((await usedEmail(putUser.email)) > 0) {
-        //               //OJO: Esta función es asíncrona porque así está definida en el validators
-        //               return res
-        //                 .status(400)
-        //                 .json({ message: "Email ya registrado. No se puede dar de alta" });
-        //             }
-        // }
+
+         const actualUser= await getUserId(id);
+
+        if(actualUser.email!== putUser.email){
+
+              if ((await usedEmail(putUser.email)) > 0) {
+                      //OJO: Esta función es asíncrona porque así está definida en el validators
+                      return res
+                        .status(400)
+                        .json({ message: "Email ya registrado. No se puede dar de alta" });
+                    }
+        }
         
-        // if ((await usedUserName(putUser.username)) > 0 && putUser.username !== username) {
-        //   //OJO: Esta función es asíncrona porque así está definida en el validators
-        //   return res
-        //     .status(400)
-        //     .json({ message: "Username ya registrado. No se puede dar de alta" });
-        // }
-    
-        //Para poder encriptar la contraseña, debo importar la librería y usarla:
-    
+        if(actualUser.username !== putUser.username){
+          if ((await usedUserName(putUser.username)) > 0) {
+          //OJO: Esta función es asíncrona porque así está definida en el validators
+          return res
+            .status(400)
+            .json({ message: "Username ya registrado. No se puede dar de alta" });
+          }
+        }
+
         putUser.password = bcrypt.hashSync(putUser.password, 10);
     
-        
+ 
         const updatedUser = await User.findByIdAndUpdate(id, putUser, {new: true});
         if(!updatedUser){
             return res.status(404).json({message: "Usuario no encontrado"})
         }
         return res.status(200).json(updatedUser);
     }catch(error){
+        console.log(error)
         return res.status(500).json(error)
     }
 }
@@ -194,19 +198,16 @@ const deleteUser = async (req, res) => {
     
 }
 
-// Añade una fruta al array frutas[] del usuario ENVIANDO iduser y idfruta mediante query:
-// EJEMPLO http://localhost:3001/users/addfruit?iduser=64578d77ee6fbcb3490197ad&idfruit=645786bc311c9738c6ebeb54
+// Añade un destino al array destinations[] del usuario ENVIANDO iduser y idDestino mediante query:
 
-const getAddfruitToUser = async (req, res) => {
+
+const getAddDestinationToUser = async (req, res) => {
     try{
-        const {iduser, idfruit} = req.query;
-       /* const pivoteUser = await User.findById(iduser);
-        pivoteUser.fruits.push(idfruit);
-        const updatedUser = await User.findByIdAndUpdate(iduser, pivoteUser, {new: true});*/
-        
+        const {iduser, idDestination} = req.query;
+               
         const updatedUser = await User.findOneAndUpdate(
             {_id: iduser},
-            {$push:{fruits: idfruit}}, 
+            {$push:{detinations: idDestination}}, 
             {new:true}
             );
         return res.status(200).json(updatedUser);
@@ -228,5 +229,5 @@ module.exports = {
     getUserByName,
     updateUser, 
     deleteUser,
-    getAddfruitToUser
+    getAddDestinationToUser
     };
