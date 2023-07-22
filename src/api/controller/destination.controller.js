@@ -13,7 +13,7 @@ const getAllDestinations = async (req, res) => {
     
 }
 
-// Devuelve un destino según su _id
+// Devuelve un destino desde su _id por params
 const getDestinationsId = async (req, res) => {
     try{
         const {id} = req.params; 
@@ -25,24 +25,24 @@ const getDestinationsId = async (req, res) => {
     
 }
 
-// Devuelve el tipo de la destino según su nombre
-const getDestinationsName = async (req, res) => {
+// Devuelve la descripción del destino desde su localización por params
+const getDestinationsDescription = async (req, res) => {
     try{
-        const {destinationName} = req.params; 
-        const getDestinationName = await Destination.find({destinationName: destinationName},{_id:0, type:1});
-        return res.status(200).json(getDestinationName);
+        const {destinationPlace} = req.params; 
+        const getDestinationDescription = await Destination.find({destinationPlace: destinationPlace},{_id:0, destinationDescription:1});
+        return res.status(200).json(getDestinationDescription);
     }catch(error){
         return res.status(500).json(error);
     }
     
 }
 
-// Devuelve destinos según su tipo
-const getDestinationsType = async (req, res) => {
+// Devuelve destinos desde su localización por params
+const getDestinationsFromLocation = async (req, res) => {
     try{
-        const {type} = req.params; 
-        const getDestinationType = await Destination.find({type: type});
-        return res.status(200).json(getDestinationType);
+        const {destinationLocation} = req.params; 
+        const getDestinations = await Destination.find({destinationPlace: destinationLocation});
+        return res.status(200).json(getDestinations);
     }catch(error){
         return res.status(500).json(error);
     }
@@ -102,8 +102,8 @@ const deleteDestinations = async (req, res) => {
 module.exports = {
     getAllDestinations,
     getDestinationsId,
-    getDestinationsName,
-    getDestinationsType,
+    getDestinationsDescription,
+    getDestinationsFromLocation,
     // -----------------
     postDestinations, 
     putDestinations, 

@@ -11,7 +11,8 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_SECRET
 })
 
-const routerFruit = require('./src/api/routes/fruit.routes.js');
+const routerActivity = require('./src/api/routes/activity.routes.js');
+const routerDestination = require('./src/api/routes/destination.routes.js');
 const routerUser = require('./src/api/routes/user.routes.js');
 
 
@@ -21,7 +22,8 @@ connect();
 app.use(cors());
 
 app.use(express.json());
-app.use('/fruits', routerFruit);
+app.use('/activities', routerActivity);
+app.use('/destinations', routerDestination);
 app.use('/users', routerUser);
 
 

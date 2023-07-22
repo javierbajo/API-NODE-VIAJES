@@ -1,48 +1,48 @@
 
-const Destination = require('../models/destination.model.js')
+const Activity = require('../models/activity.model.js')
 
 
-// Devuelve todos los destinos
-const getAllDestinations = async (req, res) => {
+// Devuelve todas las actividades
+const getAllActivities = async (req, res) => {
     try{
-        const allDestinations = await Destination.find()
-        return res.status(200).json(allDestinations);
+        const allActivities = await Activity.find()
+        return res.status(200).json(allActivities);
     }catch(error){
         return res.status(500).json(error);
     }
     
 }
 
-// Devuelve un destino según su _id
-const getDestinationsId = async (req, res) => {
+// Devuelve una actividad desde su _id por params
+const getActivitiesId = async (req, res) => {
     try{
         const {id} = req.params; 
-        const getDestinationId = await Destination.find({_id: id});
-        return res.status(200).json(getDestinationId);
+        const getActivityId = await Activity.find({_id: id});
+        return res.status(200).json(getActivityId);
     }catch(error){
         return res.status(500).json(error);
     }
     
 }
 
-// Devuelve el tipo de la destino según su nombre
-const getDestinationsName = async (req, res) => {
+// Devuelve el precio de actividad desde su nombre por params
+const getActivitiesPrice = async (req, res) => {
     try{
-        const {destinationName} = req.params; 
-        const getDestinationName = await Destination.find({destinationName: destinationName},{_id:0, type:1});
-        return res.status(200).json(getDestinationName);
+        const {activityName} = req.params; 
+        const getActivityPrice = await Activity.find({activityName: activityName},{_id:0, activityPrice:1});
+        return res.status(200).json(getActivityPrice);
     }catch(error){
         return res.status(500).json(error);
     }
     
 }
 
-// Devuelve destinos según su tipo
-const getDestinationsType = async (req, res) => {
+// Devuelve actividades desde su localización por params
+const getActivitiesPlace = async (req, res) => {
     try{
-        const {type} = req.params; 
-        const getDestinationType = await Destination.find({type: type});
-        return res.status(200).json(getDestinationType);
+        const {activityPlace} = req.params; 
+        const getActivityPlace = await Activity.find({activityPlace: activityPlace});
+        return res.status(200).json(getActivityPlace);
     }catch(error){
         return res.status(500).json(error);
     }
@@ -51,48 +51,48 @@ const getDestinationsType = async (req, res) => {
 
 
 
-// Crea un nuevo destino en la DB
-const postDestinations = async (req, res) => {
+// Crea un nueva actividad en la DB
+const postActivities = async (req, res) => {
     try{
-        const newDestination = new Destination(req.body);
+        const newActivity = new Activity(req.body);
 
         if(req.file.path){
-            newDestination.image = req.file.path;
+            newActivity.activityImg = req.file.path;
         }
-        const createdDestination = await newDestination.save();
-        return res.status(201).json(createdDestination);
+        const createdActivity = await newActivity.save();
+        return res.status(201).json(createdActivity);
     }catch (error) {
         return res.status(500).json(error);
     }
 }
-// Modifica un destino enviando id por la url y datos nuevos por el body
-const putDestinations = async (req, res) => {
+// Modifica una actividad desde id por params y datos por el body
+const putActivities = async (req, res) => {
     console.log(req.body);
     try{
         const {id} = req.params;
-        const putDestination = new Destination(req.body);
-        putDestination._id = id;
+        const putActivity = new Activity(req.body);
+        putActivity._id = id;
         if(req.file.path){
-            putDestination.image = req.file.path;
+            putActivity.activityImg = req.file.path;
         }
-        const updatedDestination = await Destination.findByIdAndUpdate(id, putDestination, {new: true});
-        if(!updatedDestination){
-            return res.status(404).json({message: "Destino no encontrado"})
+        const updatedActivity = await Activity.findByIdAndUpdate(id, putActivity, {new: true});
+        if(!updatedActivity){
+            return res.status(404).json({message: "Actividad no encontrada"})
         }
-        return res.status(200).json(updatedDestination);
+        return res.status(200).json(updatedActivity);
     }catch(error){
         return res.status(500).json(error)
     }
 }
-// Elimina destinos de la base de datos mandando su id por la url
-const deleteDestinations = async (req, res) => {
+// Elimina actividades de la base de datos mandando su id por la url
+const deleteActivities = async (req, res) => {
     try{
         const {id} = req.params;
-        const deletedDestination = await Destination.findByIdAndDelete(id);
-        if(!deletedDestination){
-            return res.status(404).json({message:"Destino no encontrado"});
+        const deletedActivity = await Activity.findByIdAndDelete(id);
+        if(!deletedActivity){
+            return res.status(404).json({message:"Actividad no encontrada"});
         }
-        return res.status(200).json(deletedDestination);
+        return res.status(200).json(deletedActivity);
     }catch(error){
         return res.status(500).json(error);
     }
@@ -100,12 +100,12 @@ const deleteDestinations = async (req, res) => {
 }
 
 module.exports = {
-    getAllDestinations,
-    getDestinationsId,
-    getDestinationsName,
-    getDestinationsType,
+    getAllActivities,
+    getActivitiesId,
+    getActivitiesPrice,
+    getActivitiesPlace,
     // -----------------
-    postDestinations, 
-    putDestinations, 
-    deleteDestinations, 
+    postActivities, 
+    putActivities, 
+    deleteActivities, 
     };
