@@ -55,13 +55,18 @@ const getDestinationsFromPlace = async (req, res) => {
 const postDestinations = async (req, res) => {
     try{
         const newDestination = new Destination(req.body);
-        JSON.parse(newDestination.destinationIncluded);
-        if(req.file.path){
-            newDestination.destinationImg = req.file.path;
+        console.log(req.files);
+        for (let i = 0; i < req.files.destinationImg.length; i++) {
+          newDestination.destinationImg = [
+            ...newDestination.destinationImg,
+            req.files.destinationImg[i].path,
+          ];
         }
+        console.log(newDestination);
         const createdDestination = await newDestination.save();
         return res.status(201).json(createdDestination);
     }catch (error) {
+        console.log(error);
         return res.status(500).json(error);
     }
 }
@@ -72,9 +77,12 @@ const putDestinations = async (req, res) => {
         const {id} = req.params;
         const putDestination = new Destination(req.body);
         putDestination._id = id;
-        if(req.file.path){
-            putDestination.destinationImg = req.file.path;
-        }
+        for (let i = 0; i < req.files.destinationImg.length; i++) {
+            putDestination.destinationImg = [
+              ...putDestination.destinationImg,
+              req.files.destinationImg[i].path,
+            ];
+          }
         const updatedDestination = await Destination.findByIdAndUpdate(id, putDestination, {new: true});
         if(!updatedDestination){
             return res.status(404).json({message: "Destino no encontrado"})

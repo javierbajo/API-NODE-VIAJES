@@ -18,8 +18,9 @@ router.get('/id/:id', getDestinationsId);
 router.get('/destinationDescription/:destinationPlace', getDestinationsDescription);
 router.get('/destinationsFromPlace/:destinationPlace', getDestinationsFromPlace);
 // -----------------------------------------
-router.post('/', upload.single('destinationImg'), postDestinations);
-router.put('/:id', upload.single('destinationImg'), putDestinations);
+// router.post('/', upload.single('destinationImg'), postDestinations);
+router.post('/', upload.fields([{ name: 'destinationImg' }]), postDestinations);
+router.put('/:id', upload.fields([{ name: 'destinationImg' }]), putDestinations);
 router.delete('/:id', deleteDestinations);
 
 
