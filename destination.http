@@ -4,54 +4,85 @@ Content-Type: application/json
 ###
 
 // Devuelve un destino desde su id por params
-GET http://localhost:3001/destinations/id/64bbad589db4079a05791a03
+GET http://localhost:3001/destinations/id/64bbad589db4079a05791a04
 Content-Type: application/json
 ###
 
-// Devuelve el precio de una actividad desde su nombre por params
-GET http://localhost:3001/activities/activityPrice/Crucero turístico con paradas libres por el río Sena de París
+// Devuelve descripción desde su localización en por params
+GET http://localhost:3001/destinations/destinationDescription/Nueva York, Estados Unidos
 ###
 
-// Devuelve actividades desde su localización por params
-GET http://localhost:3001/activities/activitiesPlace/Olmedo, Valladolid
-Content-Type: application/json
+// Devuelve destinos desde su localización por params
+GET http://localhost:3001/destinations/destinationsFromPlace/París, Francia
 ###
 
 
-// Añade una nueva actividad la base de datos. Falta descubrir cómo cargar una foto desde REST CLient. No funciona desde que tiene enlace claoudinary. Sólo desde Postman
-POST http://localhost:3001/activities
+// Añade un nuevo destino en la base de datos. Falta descubrir cómo cargar una foto desde REST CLient. No funciona desde que tiene enlace claoudinary. Sólo desde Postman
+POST http://localhost:3001/destinations
 Content-Type: application/json
 
 
-{
-    "activityName": "Ir a cagar a Olmedo",
-    "activityPlace": "Olmedo, valladolid",
-    "activityDate": " 9 de Octubre 2023",
-    "activityTime": "10:00",
-    "activityPrice": 5,
-    "activityImg": "https://www.atrapalo.com/ou/static/_next/image/?url=https%3A%2F%2Fcdn.atrapalo.com%2Fcommon%2Fphoto%2Fevent%2F4%2F8%2F4%2F8326%2F1127781%2Ftic_0_0.jpg&w=574&q=75",
-    "activityDescription": "Entrar al servicio del castillo, sentarse en wáter, empujar.",
+  {
+    "destinationHotel": {
+      "hotelName": "Norman Vates motel",
+      "hotelCategory": "5 chapas",
+      "hotelLocation": "Carretera oscura km 666"
+    },
+    "destinationPlace": "Costa da Morte, Galicia profunda",
+    "destinationDate": "Desde el 9 al 17 de Octubre 2023",
+    "destinationPrice": 200,
+    "destinationDescription": "¿Te imaginas estar en la ducha y que apareza un tipo con una peluca rubia y un cuchillo?",
+    "destinationIncluded": [
+      "Seguro de accidentes",
+      "Maletín de primeros auxilios",
+      "Pastillas de cianuro",
+      "Traslados en ambulancia",
+      "Collar de ajos"
+    ],
+     "destinationInformation": "Precios, fechas y disponibilidad están sujetos a cambios. Consulta con nuestro equipo de ventas para obtener más detalles sobre el paquete y las promociones especiales disponibles.",
+    "destinationImg": [
+      "https://res.cloudinary.com/dgenowvll/image/upload/v1689979140/Destinos/paris_37bc088a_1280x720_jwmj2l.jpg",
+      "https://res.cloudinary.com/dgenowvll/image/upload/v1689979140/Destinos/87c891d0-7f75-11e8-b6b0-0242ac110007_aj43is.webp",
+      "https://res.cloudinary.com/dgenowvll/image/upload/v1689979140/Destinos/a60c7ed4-cc5d-478e-98fa-0c4210ed2908_n7vqho.webp",
+      "https://res.cloudinary.com/dgenowvll/image/upload/v1689979140/Destinos/948ecba9-2af5-4b9c-876f-9c51bb46043b_xfo3qd.webp"
+    ],
 }
 
 
 
 ###
-// Modifica actividad enviando su _id por la url y nuevos datos por el body. Sólo desde postman
-PUT http://localhost:3001/activities/64bba6f2298e19ff9d296a2d
+// Modifica destino enviando su _id por la url y nuevos datos por el body. Sólo desde postman
+PUT http://localhost:3001/destinations/64bba6f2298e19ff9d296a2d
 Content-Type: application/json
 
 {
-    "activityName": "Ver el castillo de Olmedo",
-    "activityPlace": "Olmedo, valladolid",
-    "activityDate": " 9 de Octubre 2023",
-    "activityTime": "10:00",
-    "activityPrice": 10,
-    "activityImg": "https://www.atrapalo.com/ou/static/_next/image/?url=https%3A%2F%2Fcdn.atrapalo.com%2Fcommon%2Fphoto%2Fevent%2F4%2F8%2F4%2F8326%2F1127781%2Ftic_0_0.jpg&w=574&q=75",
-    "activityDescription": "Entrar al castillo a verlo.",
+    "destinationHotel": {
+      "hotelName": "Norman Vates motel",
+      "hotelCategory": "5 cuchillos",
+      "hotelLocation": "Carretera de Puxeiros km 99"
+    },
+    "destinationPlace": "Pontevedra, Galicia profunda",
+    "destinationDate": "Desde el 9 al 17 de Octubre 2023",
+    "destinationPrice": 200,
+    "destinationDescription": "¿Te imaginas estar en la ducha y que apareza un tipo con una peluca rubia y un cuchillo?",
+    "destinationIncluded": [
+      "Seguro de accidentes",
+      "Maletín de primeros auxilios",
+      "Pastillas de cianuro",
+      "Traslados en ambulancia",
+      "Collar de ajos"
+    ],
+     "destinationInformation": "Precios, fechas y disponibilidad están sujetos a cambios. Consulta con nuestro equipo de ventas para obtener más detalles sobre el paquete y las promociones especiales disponibles.",
+    "destinationImg": [
+      "https://res.cloudinary.com/dgenowvll/image/upload/v1689979140/Destinos/paris_37bc088a_1280x720_jwmj2l.jpg",
+      "https://res.cloudinary.com/dgenowvll/image/upload/v1689979140/Destinos/87c891d0-7f75-11e8-b6b0-0242ac110007_aj43is.webp",
+      "https://res.cloudinary.com/dgenowvll/image/upload/v1689979140/Destinos/a60c7ed4-cc5d-478e-98fa-0c4210ed2908_n7vqho.webp",
+      "https://res.cloudinary.com/dgenowvll/image/upload/v1689979140/Destinos/948ecba9-2af5-4b9c-876f-9c51bb46043b_xfo3qd.webp"
+    ],
 }
 ###
-//Elimina actividades mandando su _id
-DELETE http://localhost:3001/activities/64bba6f2298e19ff9d296a2d
+//Elimina destinos mandando su _id
+DELETE http://localhost:3001/destinations/64bbad589db4079a05791a03
 Content-Type: application/json
 
 ###

@@ -38,10 +38,10 @@ const getDestinationsDescription = async (req, res) => {
 }
 
 // Devuelve destinos desde su localización por params
-const getDestinationsFromLocation = async (req, res) => {
+const getDestinationsFromPlace = async (req, res) => {
     try{
-        const {destinationLocation} = req.params; 
-        const getDestinations = await Destination.find({destinationPlace: destinationLocation});
+        const {destinationPlace} = req.params; 
+        const getDestinations = await Destination.find({destinationPlace: destinationPlace});
         return res.status(200).json(getDestinations);
     }catch(error){
         return res.status(500).json(error);
@@ -55,9 +55,9 @@ const getDestinationsFromLocation = async (req, res) => {
 const postDestinations = async (req, res) => {
     try{
         const newDestination = new Destination(req.body);
-
+        JSON.parse(newDestination.destinationIncluded);
         if(req.file.path){
-            newDestination.image = req.file.path;
+            newDestination.destinationImg = req.file.path;
         }
         const createdDestination = await newDestination.save();
         return res.status(201).json(createdDestination);
@@ -73,7 +73,7 @@ const putDestinations = async (req, res) => {
         const putDestination = new Destination(req.body);
         putDestination._id = id;
         if(req.file.path){
-            putDestination.image = req.file.path;
+            putDestination.destinationImg = req.file.path;
         }
         const updatedDestination = await Destination.findByIdAndUpdate(id, putDestination, {new: true});
         if(!updatedDestination){
@@ -103,7 +103,7 @@ module.exports = {
     getAllDestinations,
     getDestinationsId,
     getDestinationsDescription,
-    getDestinationsFromLocation,
+    getDestinationsFromPlace,
     // -----------------
     postDestinations, 
     putDestinations, 

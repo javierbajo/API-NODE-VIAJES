@@ -4,7 +4,7 @@ const {
     getAllDestinations, 
     getDestinationsId,
     getDestinationsDescription,
-    getDestinationsFromLocation,
+    getDestinationsFromPlace,
     // --------------------
     postDestinations, 
     putDestinations, 
@@ -15,11 +15,11 @@ const router = express.Router();
 
 router.get('/', getAllDestinations);
 router.get('/id/:id', getDestinationsId);
-router.get('/destinationName/:destinationName', getDestinationsDescription);
-router.get('/type/:type', getDestinationsFromLocation);
+router.get('/destinationDescription/:destinationPlace', getDestinationsDescription);
+router.get('/destinationsFromPlace/:destinationPlace', getDestinationsFromPlace);
 // -----------------------------------------
-router.post('/', upload.single('image'), postDestinations);
-router.put('/:id', upload.single('image'), putDestinations);
+router.post('/', upload.single('destinationImg'), postDestinations);
+router.put('/:id', upload.single('destinationImg'), putDestinations);
 router.delete('/:id', deleteDestinations);
 
 
