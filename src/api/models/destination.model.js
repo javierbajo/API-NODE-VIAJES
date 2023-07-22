@@ -10,9 +10,9 @@ const destinationSchema = new Schema(
         destinationDescription: {type: String, required: true},
         destinationIncluded: [{type: String}],
         destinationHotel:{
-            "nombre": { type: String, required: true},
-            "categoria": { type: String, required: false, default:""},
-            "ubicacion": { type: String, required: false, default:""}
+            "hotelName": { type: String, required: true},
+            "hotelCategory": { type: String, required: false, default:""},
+            "hotelLocation": { type: String, required: false, default:""}
             },
         destinationInformation: { type: String, required: false, default:""},
         destinationImg:[{type: String}]

@@ -841,7 +841,7 @@ mongoose.connect(process.env.DB_URL)
     await Destination.insertMany(destinationsMap);
     console.log("Destinos insertados");
 })
-.catch((error) => console.log(`Error insertando destinos: $:{error}`))
+.catch((error) => console.log(`Error insertando destinos: ${error}`))
 .finally(() => mongoose.disconnect());
 
 

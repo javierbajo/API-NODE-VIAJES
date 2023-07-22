@@ -13,7 +13,7 @@ GET http://localhost:3001/activities/activityPrice/Crucero turístico con parada
 ###
 
 // Devuelve actividades desde su localización por params
-GET http://localhost:3001/activities/activitiesPlace/Olmedo, valladolid
+GET http://localhost:3001/activities/activitiesPlace/Olmedo, Valladolid
 Content-Type: application/json
 ###
 
@@ -24,7 +24,24 @@ Content-Type: application/json
 
 
 {
-    "activityName": "Ver el castillo",
+    "activityName": "Ir a cagar a Olmedo",
+    "activityPlace": "Olmedo, valladolid",
+    "activityDate": " 9 de Octubre 2023",
+    "activityTime": "10:00",
+    "activityPrice": 5,
+    "activityImg": "https://www.atrapalo.com/ou/static/_next/image/?url=https%3A%2F%2Fcdn.atrapalo.com%2Fcommon%2Fphoto%2Fevent%2F4%2F8%2F4%2F8326%2F1127781%2Ftic_0_0.jpg&w=574&q=75",
+    "activityDescription": "Entrar al servicio del castillo, sentarse en wáter, empujar.",
+}
+
+
+
+###
+// Modifica actividad enviando su _id por la url y nuevos datos por el body. Sólo desde postman
+PUT http://localhost:3001/activities/64bba6f2298e19ff9d296a2d
+Content-Type: application/json
+
+{
+    "activityName": "Ver el castillo de Olmedo",
     "activityPlace": "Olmedo, valladolid",
     "activityDate": " 9 de Octubre 2023",
     "activityTime": "10:00",
@@ -32,24 +49,9 @@ Content-Type: application/json
     "activityImg": "https://www.atrapalo.com/ou/static/_next/image/?url=https%3A%2F%2Fcdn.atrapalo.com%2Fcommon%2Fphoto%2Fevent%2F4%2F8%2F4%2F8326%2F1127781%2Ftic_0_0.jpg&w=574&q=75",
     "activityDescription": "Entrar al castillo a verlo.",
 }
-
-
-
 ###
-// Modifica fruta enviando su _id por la url
-PUT http://localhost:3001/fruits/646bf8f9f3131ff739149379
-Content-Type: application/json
-
-{
-        "fruitName": "plátano",
-        "type": "dulce",
-        "priceKg": 2.85,
-        "origin": "Canarias",
-        "image": ""
-}
-###
-//Elimina frutas mandando su _id
-DELETE http://localhost:3001/fruits/646d3b2ccda8893918c08df6
+//Elimina actividades mandando su _id
+DELETE http://localhost:3001/activities/64bba6f2298e19ff9d296a2d
 Content-Type: application/json
 
 ###
