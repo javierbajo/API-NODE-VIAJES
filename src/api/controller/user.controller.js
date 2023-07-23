@@ -217,7 +217,21 @@ const getAddDestinationToUser = async (req, res) => {
     
 }
 
-
+const getAddActivityToUser = async (req, res) => {
+  try{
+      const {iduser, idActivity} = req.query;
+             
+      const updatedUser = await User.findOneAndUpdate(
+          {_id: iduser},
+          {$push:{activities: idActivity}}, 
+          {new:true}
+          );
+      return res.status(200).json(updatedUser);
+  }catch(error){
+      return res.status(500).json(error);
+  }
+  
+}
 
 module.exports = {
     loginUser,
@@ -229,5 +243,6 @@ module.exports = {
     getUserByName,
     updateUser, 
     deleteUser,
-    getAddDestinationToUser
+    getAddDestinationToUser,
+    getAddActivityToUser
     };

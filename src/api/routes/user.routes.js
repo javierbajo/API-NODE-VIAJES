@@ -12,7 +12,8 @@ const {
     updateUser, 
     deleteUser, 
     // -------------
-    getAddDestinationToUser
+    getAddDestinationToUser,
+    getAddActivityToUser
     } = require('../controller/user.controller');
 
 //Para validar usuarios debo importar los ficheros del MIDDLEWARE
@@ -43,7 +44,7 @@ router.put('/update/:id', [isAuth], updateUser);
 router.delete('/delete/:id', [isAuth], deleteUser);
 // ----------------------------------------
 router.get('/addDestination', [isAuth], getAddDestinationToUser);
-
+router.get('/addActivity', [isAuth], getAddActivityToUser);
 
 
 module.exports = router;

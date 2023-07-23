@@ -14,7 +14,8 @@ const userSchema = new Schema(
         nombre: {type:String, required: true},
         apellidos: {type:String, required: true},
         direccion: {type:String, required: true},
-        destination: [{type: Schema.Types.ObjectId, ref: 'destinations'}] 
+        destination: [{type: Schema.Types.ObjectId, ref: 'destinations'}],
+        activity: [{type: Schema.Types.ObjectId, ref: 'activities'}] 
          // la ref de reservas: es el nombre de la colección en la DB de donde toma los id
     },{
         timestamps: true,
