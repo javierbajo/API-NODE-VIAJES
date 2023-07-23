@@ -1,7 +1,7 @@
 {
   "name": "node5",
   "version": "1.0.0",
-  "description": "",
+  "description": "Proyecto final equipo 3: API en Node con MongoDB",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",
-    "cloudinary": "^1.37.0",
+    "cloudinary": "^1.38.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -27,5 +27,13 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javierbajo/API-NODE-VIAJES.git"
+  },
+  "bugs": {
+    "url": "https://github.com/javierbajo/API-NODE-VIAJES/issues"
+  },
+  "homepage": "https://github.com/javierbajo/API-NODE-VIAJES#readme"
 }
