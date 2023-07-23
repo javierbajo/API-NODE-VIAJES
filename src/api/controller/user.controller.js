@@ -94,10 +94,12 @@ const loginUser = async (req, res) => {
 // Devuelve todos los usuarios
 const getAllUsers = async (req, res) => {
     try{
-        const allUsers = await User.find();
-        // const allUsers = await User.find().populate({
-        //     path: "fruits", select:"fruitName"
-        // }); // .find({_id: id}) es lo mismo que .findById(id);
+        const allUsers = await User.find()
+        .populate({
+        path: "destinations", select:"destinationPlace"
+        },{
+          path: "activities", select:"activityName"
+          }); // .find({_id: id}) es lo mismo que .findById(id);
         return res.status(200).json(allUsers);
     }catch(error){
         return res.status(500).json(error);
@@ -111,7 +113,7 @@ const getUserById = async (req, res) => {
         const {id} = req.params;
         const getUserId = await User.findById(id)
         // const getUserId = await User.findById(id).populate({
-        //     path: "fruits", select:"fruitName"
+        //     path: "destinations", select:"destinationName"
         // }); // .find({_id: id}) es lo mismo que .findById(id)
         return res.status(200).json(getUserId);
     }catch(error){
