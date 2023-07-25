@@ -26,6 +26,9 @@ const loginUser = async (req, res) => {
       }
       //console.log(userInfo.id);
       const token = generateSign(userInfo.id, userInfo.email);
+
+      //No envío la contraseña
+      delete userInfo.password;
       //console.log(token);
       //Debo enviar el token con la información del usuario
       return res.status(200).json({ token, userInfo });
@@ -143,9 +146,9 @@ const updateUser = async (req, res) => {
         putUser._id = id;
 
       
-        if (!validatePassword(putUser.password)) {
-          return res.status(400).json({ message: "Contraseña incorrecta" });
-        }
+        // if (!validatePassword(putUser.password)) {
+        //   return res.status(400).json({ message: "Contraseña incorrecta" });
+        // }
         if (!validateEmail(putUser.email)) {
           return res.status(400).json({ message: "Formato email incorrecto" });
         }
@@ -171,7 +174,7 @@ const updateUser = async (req, res) => {
           }
         }
 
-        putUser.password = bcrypt.hashSync(putUser.password, 10);
+        // putUser.password = bcrypt.hashSync(putUser.password, 10);
     
  
         const updatedUser = await User.findByIdAndUpdate(id, putUser, {new: true});
