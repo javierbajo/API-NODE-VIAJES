@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 const generateSign = (id,email)=>{
     //id e email son los correspondientes al usuario que solicita el token
     //El tercer parámetro es la duración del token
-    return jwt.sign({id,email}, process.env.JWT_KEY, {expiresIn:"1h"});
+    return jwt.sign({id,email}, process.env.JWT_KEY, {expiresIn:"6h"});
 }
 
 const verifySign = (token)=>{

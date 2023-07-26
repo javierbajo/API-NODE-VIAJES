@@ -1,5 +1,7 @@
 const express = require('express');
-const upload = require("../../middlewares/upload.file")
+const upload = require("../../middlewares/upload.file");
+const { isAuth, isAdmin } = require('../../middlewares/auth');
+
 const {
     getAllActivities, 
     getActivitiesId,
@@ -21,7 +23,7 @@ router.get('/activitiesPlace/:activityPlace', getActivitiesPlace);
 // -----------------------------------------
 router.post('/', upload.single('activityImg'), postActivities);
 router.put('/:id', upload.single('activityImg'), putActivities);
-router.delete('/:id', deleteActivities);
+router.delete('/:id', [isAdmin], deleteActivities);
 
 
 

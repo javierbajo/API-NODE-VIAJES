@@ -17,19 +17,27 @@ const { generateSign } = require("../../utils/jwt");
 const loginUser = async (req, res) => {
     //Debo comparar la contraseña con la encriptada
     try {
-      const userInfo = await User.findOne({ email: req.body.email });
+      const userInf = await User.findOne({ email: req.body.email });
       if (
-        !userInfo ||
-        !bcrypt.compareSync(req.body.password, userInfo.password)
+        !userInf ||
+        !bcrypt.compareSync(req.body.password, userInf.password)
       ) {
         return res.status(400).json({ message: "Datos incorrectos" });
       }
       //console.log(userInfo.id);
-      const token = generateSign(userInfo.id, userInfo.email);
+      const token = generateSign(userInf.id, userInf.email);
 
-      //No envío la contraseña
-      delete userInfo.password;
-      //console.log(token);
+      const userInfo={
+        email: userInf.email,
+        username: userInf.username,
+        role: userInf.role,
+        telefono: userInf.telefono,
+        nombre: userInf.nombre,
+        apellidos: userInf.apellidos,
+        direccion: userInf.direccion,
+        destination: userInf.destination,
+        activity: userInf.activity
+    }
       //Debo enviar el token con la información del usuario
       return res.status(200).json({ token, userInfo });
     } catch (error) {
